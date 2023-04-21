@@ -1,0 +1,63 @@
+{
+  "SDKVersion": 2,
+  "Author": "David Campman",
+  "CodePath": "app.html",
+  "Description": "Task time tracking plugin for Stream Deck",
+  "Name": "TimeKeeper",
+  "Icon": "actions/timekeeper/assets/icon",
+  "URL": "https://github.com/dcampman/TimeKeeper",
+  "Version": "1.0.0",
+  "Software": {
+    "MinimumVersion": "5.0"
+  },
+  "OS": [
+    {
+      "Platform": "mac",
+      "MinimumVersion": "10.11"
+    },
+    {
+      "Platform": "windows",
+      "MinimumVersion": "10"
+    }
+  ],
+  "Category": "Time Tracking",
+  "CategoryIcon": "actions/tasktimer/assets/action",
+  "Actions": [
+    {
+      "Icon": "actions/tasktimer/assets/actionIcon",
+      "Name": "Task Timer",
+      "States": [
+        {
+          "Image": "actions/tasktimer/assets/action",
+          "TitleAlignment": "middle",
+          "TitleColor": "blue",
+          "TitleFontSize": "25",
+          "ImageStyle": "resizeAspectFill",
+          "FontFamily": "HelveticaNeue-Bold",
+          "Title": "00:00"
+        }
+      ],
+      "Tooltip": "Start, pause, or reset the task timer",
+      "UUID": "com.dcampman.timekeeper.tasktimer",
+      "PropertyInspectorPath": "actions/tasktimer/property-inspector/inspector.html"
+    },
+    {
+      "Icon": "actions/pauseAll/assets/actionIcon",
+      "Name": "Pause All Timers",
+      "States": [
+        {
+          "Image": "actions/pauseAll/assets/action",
+          "TitleAlignment": "middle",
+          "TitleColor": "blue",
+          "TitleFontSize": "25",
+          "ImageStyle": "resizeAspectFill",
+          "FontFamily": "HelveticaNeue-Bold",
+          "Title": "PAUSE\nALL"
+        }
+      ],
+      "Tooltip": "Pause or resume all active task timers",
+      "UUID": "com.dcampman.timekeeper.pauseall",
+      "PropertyInspectorPath": "actions/pauseAll/property-inspector/inspector.html"
+    }
+  ]
+}
