@@ -8,8 +8,6 @@ TimeKeeper is a Stream Deck plugin that helps you track your time for various ta
 - Start, pause, and resume timers for each task with a single button.
 - Pause and resume all timers with a dedicated button.
 - Customize the task name and logo on the button.
-- Display the tracked time on the button in HH:MM format.
-- Automatically resize the task logo to fit the button.
 - Export tracked time in JSON, CSV, or plain text format.
 
 ## Installation

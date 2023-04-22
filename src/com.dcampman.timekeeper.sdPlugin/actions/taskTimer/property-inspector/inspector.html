@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="inspector.css" />
+    <title>Task Timer Property Inspector</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="form-group">
+        <label for="taskName">Customer Name</label>
+        <input type="text" id="taskName" placeholder="Enter customer name" />
+      </div>
+      <div class="form-group">
+        <label for="outputFormat">Output Format</label>
+        <select id="outputFormat">
+          <option value="json">JSON</option>
+          <option value="csv">CSV</option>
+          <option value="plain_text">Plain Text</option>
+        </select>
+      </div>
+    </div>
+    <script src="inspector.js"></script>
+  </body>
+</html>
