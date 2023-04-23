@@ -21,20 +21,16 @@
     }
   ],
   "Category": "Time Tracking",
-  "CategoryIcon": "actions/tasktimer/assets/action",
+  "CategoryIcon": "/assets/categoryIcon.png",
   "Actions": [
     {
-      "Icon": "actions/tasktimer/assets/actionIcon",
+      "Icon": "actions/tasktimer/assets/actionIcon.png",
       "Name": "Task Timer",
       "States": [
         {
-          "Image": "actions/tasktimer/assets/action",
-          "TitleAlignment": "middle",
-          "TitleColor": "blue",
-          "TitleFontSize": "25",
+          "Image": "actions/tasktimer/assets/action.png",
           "ImageStyle": "resizeAspectFill",
-          "FontFamily": "HelveticaNeue-Bold",
-          "Title": "00:00"
+          "FontFamily": "HelveticaNeue-Bold"
         }
       ],
       "Tooltip": "Start, pause, or reset the task timer",
@@ -42,22 +38,23 @@
       "PropertyInspectorPath": "actions/tasktimer/property-inspector/inspector.html"
     },
     {
-      "Icon": "actions/pauseAll/assets/actionIcon",
+      "Icon": "actions/pauseAll/assets/actionIcon.png",
       "Name": "Pause All Timers",
       "States": [
         {
-          "Image": "actions/pauseAll/assets/action",
-          "TitleAlignment": "middle",
-          "TitleColor": "blue",
-          "TitleFontSize": "25",
-          "ImageStyle": "resizeAspectFill",
+          "Image": "actions/pauseAll/assets/action.png",
           "FontFamily": "HelveticaNeue-Bold",
-          "Title": "PAUSE\nALL"
+          "Title": "PAUSE ALL",
+          "TitleAlignment": "middle",
+          "TitleColor": "white",
+          "TitleFontSize": "30",
+          "ImageStyle": "resizeAspectFill"
         }
       ],
       "Tooltip": "Pause or resume all active task timers",
       "UUID": "com.dcampman.timekeeper.pauseall",
-      "PropertyInspectorPath": "actions/pauseAll/property-inspector/inspector.html"
+      "PropertyInspectorPath": "actions/pauseAll/property-inspector/inspector.html",
+      "UserTitleEnabled": "false"
     }
   ]
 }
