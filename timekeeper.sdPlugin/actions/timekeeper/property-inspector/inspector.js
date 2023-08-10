@@ -37,7 +37,13 @@ document.getElementById('filePath').addEventListener('change', function() {
     document.getElementById('taskDescription').addEventListener('change', function() {
         // Handle change in task description
     });
-    document.getElementById('timeFormat').addEventListener('change', function() {
-        // Handle change in time format
-    });
+document.getElementById('timeFormat').addEventListener('change', function() {
+  // Send the new time format to the plugin
+  $SD.api.sendToPlugin($SD.uuid, {
+    event: 'setTimeFormat',
+    payload: {
+      timeFormat: this.value
+    }
+  });
+});
 });

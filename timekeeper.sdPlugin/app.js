@@ -15,19 +15,22 @@ $SD.onConnected(
 let logFileFormat = 'txt'; // This will be updated with the user's input
 
 function writeToLogFile(message, format) {
+  const date = new Date();
+  const dateString = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`;
+  const fullMessage = `${dateString} ${message}`;
   switch (format) {
     case 'json':
-      fs.appendFile(logFilePath, JSON.stringify({ message }) + '\n', err => {
+      fs.appendFile(logFilePath, JSON.stringify({ fullMessage }) + '\n', err => {
         if (err) throw err;
       });
       break;
     case 'csv':
-      fs.appendFile(logFilePath, `"${message}"\n`, err => {
+      fs.appendFile(logFilePath, `"${fullMessage}"\n`, err => {
         if (err) throw err;
       });
       break;
     default: // txt
-      fs.appendFile(logFilePath, message + '\n', err => {
+      fs.appendFile(logFilePath, fullMessage + '\n', err => {
         if (err) throw err;
       });
       break;
