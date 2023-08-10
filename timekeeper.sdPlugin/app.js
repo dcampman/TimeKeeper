@@ -1,3 +1,4 @@
+const StreamDeckSDK = require('./libs/js');
 const myAction = new Action("com.timekeeper.timekeeper");
 const pauseAllAction = new Action("com.timekeeper.pauseall");
 const timers = {};
