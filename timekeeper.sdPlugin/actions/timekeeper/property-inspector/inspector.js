@@ -3,15 +3,7 @@ const Utils = require("../../../libs/js/utils.js");
 
 $PI.onConnected((jsn) => {
   // Your JavaScript code goes here
-document.getElementById("fileType").addEventListener("change", function () {
-    // Send the new file format to the plugin
-    $SD.api.sendToPlugin($SD.uuid, {
-      event: "setLogFileFormat",
-      payload: {
-        logFileFormat: this.value,
-      },
-    });
-});
+// Removed duplicate event listener
   // Removed event listener for filePath
   document
     .getElementById("imageUpload")

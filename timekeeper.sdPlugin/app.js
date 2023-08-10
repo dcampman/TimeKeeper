@@ -53,12 +53,7 @@ myAction.onKeyUp(({ action, context, device, event, payload }) => {
   }
 });
 
-pauseAllAction.onKeyUp(({ action, context, device, event, payload }) => {
-  // Pause all timers
-  for (let timer of Object.values(timers)) {
-    timer.pause();
-  }
-});
+// Removed duplicate event
 
 $SD.onMessage((uuid, json) => {
   if (json.event === 'setLogFilePath') {
