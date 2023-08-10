@@ -1,20 +1,15 @@
 # TimeKeeper
 
-TimeKeeper is a Stream Deck plugin that helps you track your time for various tasks. It allows you to start, pause, and resume timers for each task, and exports the tracked time in JSON, CSV, or plain text format.
+TimeKeeper is a Stream Deck plugin that helps you track your time for various tasks. It allows you to start, pause, and resume timers for each task, and exports the tracked time to a JSON file, CSV file, or plain text file.
 
 ## Features
 
-- Assign a button to track a specific task.
-- Start, pause, and resume timers for each task with a single button.
-- Pause and resume all timers with a dedicated button.
+- Assign a streamdeck action to a button to record time of a specific task.
+- Start, pause, and resume timers for each task.
+- A long press on an action button resets the timer.
+- Pause and resume all timers with a seperate dedicated button.
 - Customize the task name and logo on the button.
 - Export tracked time in JSON, CSV, or plain text format.
-
-## Installation
-
-1. Download the latest release of TimeKeeper from the [Releases page](https://github.com/dcampman/TimeKeeper/releases).
-2. Double-click the `.streamDeckPlugin` file to install the plugin in Stream Deck.
-3. Add the TimeKeeper action to a button on your Stream Deck.
 
 ## Usage
 
