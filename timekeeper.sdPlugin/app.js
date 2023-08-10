@@ -12,8 +12,27 @@ $SD.onConnected(
   }
 );
 
-const fs = require('fs');
-let logFilePath = './log.txt'; // This will be updated with the user's input
+let logFileFormat = 'txt'; // This will be updated with the user's input
+
+function writeToLogFile(message, format) {
+  switch (format) {
+    case 'json':
+      fs.appendFile(logFilePath, JSON.stringify({ message }) + '\n', err => {
+        if (err) throw err;
+      });
+      break;
+    case 'csv':
+      fs.appendFile(logFilePath, `"${message}"\n`, err => {
+        if (err) throw err;
+      });
+      break;
+    default: // txt
+      fs.appendFile(logFilePath, message + '\n', err => {
+        if (err) throw err;
+      });
+      break;
+  }
+}
 
 myAction.onKeyUp(({ action, context, device, event, payload }) => {
   if (timers[context]) {
@@ -21,17 +40,13 @@ myAction.onKeyUp(({ action, context, device, event, payload }) => {
     timers[context].pause();
     const pauseTime = new Date();
     const elapsedTime = timers[context].getTime();
-    fs.appendFile(logFilePath, `Pause: ${pauseTime}, Elapsed Time: ${elapsedTime}\n`, err => {
-      if (err) throw err;
-    });
+    writeToLogFile(`Pause: ${pauseTime}, Elapsed Time: ${elapsedTime}`, logFileFormat);
   } else {
     // If no timer exists, start a new one
     timers[context] = new Timer();
     timers[context].start();
     const startTime = new Date();
-    fs.appendFile(logFilePath, `Start: ${startTime}\n`, err => {
-      if (err) throw err;
-    });
+    writeToLogFile(`Start: ${startTime}`, logFileFormat);
   }
 });
 
@@ -45,5 +60,7 @@ pauseAllAction.onKeyUp(({ action, context, device, event, payload }) => {
 $SD.onMessage((uuid, json) => {
   if (json.event === 'setLogFilePath') {
     logFilePath = json.payload.logFilePath;
+  } else if (json.event === 'setLogFileFormat') {
+    logFileFormat = json.payload.logFileFormat;
   }
 });

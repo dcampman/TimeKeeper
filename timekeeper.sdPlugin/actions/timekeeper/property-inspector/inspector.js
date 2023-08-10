@@ -6,15 +6,25 @@ $PI.onConnected((jsn) => {
     document.getElementById('fileType').addEventListener('change', function() {
         // Handle change in file type
     });
-    document.getElementById('filePath').addEventListener('change', function() {
-        // Send the new file path to the plugin
-        $SD.api.sendToPlugin($SD.uuid, {
-            event: 'setLogFilePath',
-            payload: {
-                logFilePath: this.value
-            }
-        });
-    });
+document.getElementById('fileType').addEventListener('change', function() {
+  // Send the new file format to the plugin
+  $SD.api.sendToPlugin($SD.uuid, {
+    event: 'setLogFileFormat',
+    payload: {
+      logFileFormat: this.value
+    }
+  });
+});
+
+document.getElementById('filePath').addEventListener('change', function() {
+  // Send the new file path to the plugin
+  $SD.api.sendToPlugin($SD.uuid, {
+    event: 'setLogFilePath',
+    payload: {
+      logFilePath: this.value
+    }
+  });
+});
     document.getElementById('imageUpload').addEventListener('change', function() {
         // Handle image upload
     });
