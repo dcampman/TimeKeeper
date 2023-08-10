@@ -1,9 +1,9 @@
 {
-  "Description": "Nimm diese Vorlage für dein erstes Plugin", 
-  "Name": "Stream Deck Template", 
-  "Category": "Templates", 
-  "com.elgato.template.action": {
-    "Name": "Action", 
+  "Description": "Nimm diese Vorlage für dein erstes Plugin",
+  "Name": "Stream Deck Template",
+  "Category": "Templates",
+  "com.test.timekeeper.action": {
+    "Name": "Action",
     "Tooltip": "Dies ist die einzige 'Action' in diesem Template"
   },
   "Localization": {
@@ -16,6 +16,5 @@
     "My title": "Mein Titel",
     "My message": "Meine Nachricht",
     "My button": "Meine Taste"
-
   }
 }
