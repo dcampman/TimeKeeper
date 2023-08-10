@@ -5,6 +5,8 @@ $PI.onConnected((jsn) => {
   // Your JavaScript code goes here
 // Removed duplicate event listener
   // Removed event listener for filePath
+$PI.onConnected((jsn) => {
+  // Event listener for image upload
   document
     .getElementById("imageUpload")
     .addEventListener("change", function () {
@@ -28,17 +30,18 @@ $PI.onConnected((jsn) => {
       };
       reader.readAsBinaryString(this.files[0]);
     });
+  // Event listener for title change
   document.getElementById("title").addEventListener("change", function () {
-    // Handle change in title
   });
+  // Event listener for background color change
   document.getElementById("bgColor").addEventListener("change", function () {
-    // Handle change in background color
   });
+  // Event listener for task description change
   document
     .getElementById("taskDescription")
     .addEventListener("change", function () {
-      // Handle change in task description
     });
+  // Event listener for time format change
   document.getElementById("timeFormat").addEventListener("change", function () {
     // Send the new time format to the plugin
     $SD.api.sendToPlugin($SD.uuid, {
