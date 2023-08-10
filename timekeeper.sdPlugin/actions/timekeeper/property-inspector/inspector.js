@@ -16,18 +16,17 @@ document.getElementById('fileType').addEventListener('change', function() {
   });
 });
 
-document.getElementById('filePath').addEventListener('change', function() {
-  // Send the new file path to the plugin
-  $SD.api.sendToPlugin($SD.uuid, {
-    event: 'setLogFilePath',
-    payload: {
-      logFilePath: this.value
-    }
-  });
-});
-    document.getElementById('imageUpload').addEventListener('change', function() {
-        // Handle image upload
+// Removed event listener for filePath
+document.getElementById('imageUpload').addEventListener('change', function() {
+  const imagePath = path.join(os.homedir(), 'Documents', 'TimeKeeper', context, 'image.png');
+  const reader = new FileReader();
+  reader.onload = function(event) {
+    fs.writeFile(imagePath, new Buffer(event.target.result), 'binary', err => {
+      if (err) throw err;
     });
+  };
+  reader.readAsBinaryString(this.files[0]);
+});
     document.getElementById('title').addEventListener('change', function() {
         // Handle change in title
     });

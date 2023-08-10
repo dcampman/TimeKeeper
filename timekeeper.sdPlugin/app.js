@@ -14,10 +14,11 @@ $SD.onConnected(
 
 let logFileFormat = 'txt'; // This will be updated with the user's input
 
-function writeToLogFile(message, format) {
+function writeToLogFile(message, format, context) {
   const date = new Date();
   const dateString = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`;
   const fullMessage = `${dateString} ${message}`;
+  const logFilePath = path.join(os.homedir(), 'Documents', 'TimeKeeper', context, 'log.txt');
   switch (format) {
     case 'json':
       fs.appendFile(logFilePath, JSON.stringify({ fullMessage }) + '\n', err => {
@@ -36,7 +37,6 @@ function writeToLogFile(message, format) {
       break;
   }
 }
-
 myAction.onKeyUp(({ action, context, device, event, payload }) => {
   if (timers[context]) {
     // If a timer exists, pause it
