@@ -14,6 +14,41 @@
 
   <body>
     <!-- Your HTML code goes here -->
+    <div>
+      <label for="fileType">Export Log File Type:</label>
+      <select id="fileType">
+        <option value="json">JSON</option>
+        <option value="csv">CSV</option>
+        <option value="txt">TXT</option>
+      </select>
+    </div>
+    <div>
+      <label for="filePath">Log File Path:</label>
+      <input type="text" id="filePath" name="filePath">
+    </div>
+    <div>
+      <label for="imageUpload">Background Image:</label>
+      <input type="file" id="imageUpload" name="imageUpload">
+    </div>
+    <div>
+      <label for="title">Title:</label>
+      <input type="text" id="title" name="title">
+    </div>
+    <div>
+      <label for="bgColor">Background Color:</label>
+      <input type="color" id="bgColor" name="bgColor">
+    </div>
+    <div>
+      <label for="taskDescription">Task Description:</label>
+      <textarea id="taskDescription" name="taskDescription"></textarea>
+    </div>
+    <div>
+      <label for="timeFormat">Time Format:</label>
+      <select id="timeFormat">
+        <option value="hh:mm:ss">HH:MM:SS</option>
+        <option value="h hours, m minutes, s seconds">H hours, M minutes, S seconds</option>
+      </select>
+    </div>
     <!-- Stream Deck Libs -->
     <script src="../../../libs/js/constants.js"></script>
     <script src="../../../libs/js/prototypes.js"></script>
