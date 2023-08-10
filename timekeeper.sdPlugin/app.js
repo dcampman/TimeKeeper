@@ -65,5 +65,20 @@ $SD.onMessage((uuid, json) => {
     logFilePath = json.payload.logFilePath;
   } else if (json.event === 'setLogFileFormat') {
     logFileFormat = json.payload.logFileFormat;
+  } else if (json.event === 'setBgColor') {
+    bgColor = json.payload.bgColor;
+    $SD.api.setSettings($SD.uuid, { bgColor });
+  } else if (json.event === 'setPausedBgColor') {
+    pausedBgColor = json.payload.pausedBgColor;
+    $SD.api.setSettings($SD.uuid, { pausedBgColor });
   }
+});
+
+pauseAllAction.onKeyUp(({ action, context, device, event, payload }) => {
+  // Pause all timers
+  for (let timer of Object.values(timers)) {
+    timer.pause();
+  }
+  // Change the background color of the pauseAll action button
+  $SD.api.setGlobalSettings($SD.uuid, { bgColor: pausedBgColor });
 });
