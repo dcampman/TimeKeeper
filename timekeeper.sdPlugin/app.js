@@ -13,7 +13,7 @@ $SD.onConnected(
 );
 
 const fs = require('fs');
-const logFilePath = './log.txt'; // Replace with the actual log file path
+let logFilePath = './log.txt'; // This will be updated with the user's input
 
 myAction.onKeyUp(({ action, context, device, event, payload }) => {
   if (timers[context]) {
@@ -39,5 +39,11 @@ pauseAllAction.onKeyUp(({ action, context, device, event, payload }) => {
   // Pause all timers
   for (let timer of Object.values(timers)) {
     timer.pause();
+  }
+});
+
+$SD.onMessage((uuid, json) => {
+  if (json.event === 'setLogFilePath') {
+    logFilePath = json.payload.logFilePath;
   }
 });
