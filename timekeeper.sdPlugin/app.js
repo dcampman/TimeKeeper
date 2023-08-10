@@ -12,14 +12,26 @@ $SD.onConnected(
   }
 );
 
+const fs = require('fs');
+const logFilePath = './log.txt'; // Replace with the actual log file path
+
 myAction.onKeyUp(({ action, context, device, event, payload }) => {
   if (timers[context]) {
     // If a timer exists, pause it
     timers[context].pause();
+    const pauseTime = new Date();
+    const elapsedTime = timers[context].getTime();
+    fs.appendFile(logFilePath, `Pause: ${pauseTime}, Elapsed Time: ${elapsedTime}\n`, err => {
+      if (err) throw err;
+    });
   } else {
     // If no timer exists, start a new one
     timers[context] = new Timer();
     timers[context].start();
+    const startTime = new Date();
+    fs.appendFile(logFilePath, `Start: ${startTime}\n`, err => {
+      if (err) throw err;
+    });
   }
 });
 
