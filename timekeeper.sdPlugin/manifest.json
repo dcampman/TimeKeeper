@@ -1,0 +1,41 @@
+{
+  "SDKVersion": 2,
+  "Author": "Elgato Systems",
+  "CodePath": "app.html",
+  "Description": "Keep track of how much time you have spent on a task.",
+  "Name": "TimeKeeper",
+  "Icon": "<placeholder>",
+  "URL": "<placeholder>",
+  "Version": "0.0.1",
+  "Software": {
+    "MinimumVersion": "5.0"
+  },
+  "OS": [
+    {
+      "Platform": "mac",
+      "MinimumVersion": "10.11"
+    },
+    {
+      "Platform": "windows",
+      "MinimumVersion": "10"
+    }
+  ],
+  "Category": "Time Management",
+  "CategoryIcon": "<placeholder>",
+  "Actions": [
+    {
+      "Icon": "<placeholder>",
+      "Name": "TimeKeeper",
+      "Tooltip": "<placeholder>",
+      "UUID": "com.timekeeper.timekeeper",
+      "PropertyInspectorPath": "actions/timekeeper/property-inspector/inspector.html"
+    },
+    {
+      "Icon": "<placeholder>",
+      "Name": "PauseAll",
+      "Tooltip": "<placeholder>",
+      "UUID": "com.timekeeper.pauseall",
+      "PropertyInspectorPath": "actions/pauseall/property-inspector/inspector.html"
+    }
+  ]
+}
