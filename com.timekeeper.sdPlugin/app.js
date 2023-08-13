@@ -61,14 +61,14 @@ myAction.onKeyUp(({ action, context, device, event, payload }) => {
     const elapsedTime = timers[context].getTime();
     writeToLogFile(
       `Pause: ${pauseTime}, Elapsed Time: ${elapsedTime}`,
-      logFileFormat
+      fileType
     );
   } else {
     // If no timer exists, start a new one
     timers[context] = new Timer();
     timers[context].start();
     const startTime = new Date();
-    writeToLogFile(`Start: ${startTime}`, logFileFormat);
+    writeToLogFile(`Start: ${startTime}, Title: ${title}, Task Description: ${taskDescription}`, fileType);
   }
 });
 
