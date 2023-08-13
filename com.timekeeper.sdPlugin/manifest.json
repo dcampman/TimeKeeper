@@ -1,0 +1,51 @@
+{
+  "SDKVersion": 2,
+  "Author": "David Campman",
+  "CodePath": "app.js",
+  "Description": "Keep track of how much time you have spent on a task.",
+  "Name": "TimeKeeper",
+  "Icon": "actions/timekeeper/assets/actionImage",
+  "URL": "https://github.com/dcampman/TimeKeeper",
+  "Version": "0.0.1",
+  "Software": {
+    "MinimumVersion": "5.0"
+  },
+  "OS": [
+    {
+      "Platform": "mac",
+      "MinimumVersion": "10.11"
+    },
+    {
+      "Platform": "windows",
+      "MinimumVersion": "10"
+    }
+  ],
+  "Category": "Time Management",
+  "CategoryIcon": "actions/timekeeper/assets/action",
+  "Actions": [
+    {
+      "Icon": "actions/timekeeper/assets/action",
+      "Name": "TimeKeeper",
+      "Tooltip": "Action Tooptip",
+      "UUID": "com.timekeeper.sdPlugin.timekeeper",
+      "PropertyInspectorPath": "actions/timekeeper/property-inspector/inspector.html",
+      "States": [
+        {
+          "Image": "actions/timekeeper/assets/action"
+        }
+      ]
+    },
+    {
+      "Icon": "actions/pauseall/assets/action",
+      "Name": "PauseAll",
+      "Tooltip": "Pause all Tooptip",
+      "UUID": "com.timekeeper.sdPlugin.pauseall",
+      "PropertyInspectorPath": "actions/pauseall/property-inspector/inspector.html",
+      "States": [
+        {
+          "Image": "actions/pauseall/assets/action"
+        }
+      ]
+    }
+  ]
+}

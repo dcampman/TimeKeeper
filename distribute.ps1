@@ -1,0 +1,1 @@
+.\DistributionTool.exe -b -i com.timekeeper.sdPlugin -o Release

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui,viewport-fit=cover"
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <title>com.timekeeper.sdPlugin.timekeeper Property Inspector</title>
+    <link rel="stylesheet" href="../../../libs/css/sdpi.css" />
+  </head>
+
+  <body>
+    <!-- Your HTML code goes here -->
+    <div>
+      <label for="fileType">Export Log File Type:</label>
+      <select id="fileType">
+        <option value="json">JSON</option>
+        <option value="csv">CSV</option>
+        <option value="txt">TXT</option>
+      </select>
+    </div>
+    <div>
+      <label for="imageUpload">Background Image:</label>
+      <input type="file" id="imageUpload" name="imageUpload">
+    </div>
+    <div>
+      <label for="title">Title:</label>
+      <input type="text" id="title" name="title">
+    </div>
+    <div>
+      <label for="bgColor">Background Color:</label>
+      <input type="color" id="bgColor" name="bgColor">
+    </div>
+    <div>
+      <label for="taskDescription">Task Description:</label>
+      <textarea id="taskDescription" name="taskDescription"></textarea>
+<div>
+  <label for="timeFormat">Time Format:</label>
+  <select id="timeFormat">
+    <option value="hh:mm:ss">HH:MM:SS</option>
+    <option value="h hours, m minutes, s seconds">H hours, M minutes, S seconds</option>
+    <option value="yyyy-mm-dd hh:mm:ss">YYYY-MM-DD HH:MM:SS</option>
+  </select>
+</div>
+    <!-- Stream Deck Libs -->
+    <script src="../../../libs/js/constants.js"></script>
+    <script src="../../../libs/js/prototypes.js"></script>
+    <script src="../../../libs/js/timers.js"></script>
+    <script src="../../../libs/js/utils.js"></script>
+    <script src="../../../libs/js/events.js"></script>
+    <script src="../../../libs/js/api.js"></script>
+    <script src="../../../libs/js/property-inspector.js"></script>
+    <script src="../../../libs/js/dynamic-styles.js"></script>
+
+    <!-- Property Inspector Source -->
+    <script src="inspector.js"></script>
+  </body>
+</html>
