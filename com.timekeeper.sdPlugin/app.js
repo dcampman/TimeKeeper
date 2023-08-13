@@ -19,10 +19,8 @@ $SD.onConnected(
 );
 
 function writeToLogFile(message, format, context) {
-  const date = new Date();
-  const dateString = `${date.getFullYear()}-${
-    date.getMonth() + 1
-  }-${date.getDate()}`;
+  const moment = require('moment');
+  const date = moment().format(timeFormat);
   const fullMessage = `${dateString} ${message}`;
   const logFilePath = path.join(
     os.homedir(),
