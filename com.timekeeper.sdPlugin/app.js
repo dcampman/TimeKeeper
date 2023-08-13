@@ -3,6 +3,12 @@ const myAction = new Action("com.timekeeper.sdPlugin.timekeeper");
 const pauseAllAction = new Action("com.timekeeper.sdPlugin.pauseall");
 const timers = {};
 
+let fileType = "txt"; // This will be updated with the user's input
+let title = ""; // This will be updated with the user's input
+let bgColor = ""; // This will be updated with the user's input
+let taskDescription = ""; // This will be updated with the user's input
+let timeFormat = ""; // This will be updated with the user's input
+
 /**
  * The first event fired when Stream Deck starts
  */
@@ -11,8 +17,6 @@ $SD.onConnected(
     console.log("Stream Deck connected!");
   }
 );
-
-let logFileFormat = "txt"; // This will be updated with the user's input
 
 function writeToLogFile(message, format, context) {
   const date = new Date();
