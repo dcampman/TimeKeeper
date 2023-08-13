@@ -69,16 +69,17 @@ myAction.onKeyUp(({ action, context, device, event, payload }) => {
 });
 
 $SD.onMessage((uuid, json) => {
-  if (json.event === "setLogFilePath") {
-    logFilePath = json.payload.logFilePath;
-  } else if (json.event === "setLogFileFormat") {
-    logFileFormat = json.payload.logFileFormat;
+  if (json.event === "setFileType") {
+    fileType = json.payload.fileType;
+  } else if (json.event === "setTitle") {
+    title = json.payload.title;
   } else if (json.event === "setBgColor") {
     bgColor = json.payload.bgColor;
     $SD.api.setSettings($SD.uuid, { bgColor });
-  } else if (json.event === "setPausedBgColor") {
-    pausedBgColor = json.payload.pausedBgColor;
-    $SD.api.setSettings($SD.uuid, { pausedBgColor });
+  } else if (json.event === "setTaskDescription") {
+    taskDescription = json.payload.taskDescription;
+  } else if (json.event === "setTimeFormat") {
+    timeFormat = json.payload.timeFormat;
   }
 });
 
