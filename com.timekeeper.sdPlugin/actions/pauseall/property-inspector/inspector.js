@@ -5,7 +5,7 @@ $PI.onConnected((jsn) => {
     // Event listener for background color change
     document.getElementById('bgColor').addEventListener('change', function() {
         $SD.api.sendToPlugin($SD.uuid, {
-            event: 'setBgColor',
+            event: 'setPauseAllBgColor',
             payload: {
                 bgColor: this.value
             }

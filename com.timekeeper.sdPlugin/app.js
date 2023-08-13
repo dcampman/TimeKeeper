@@ -78,9 +78,9 @@ $SD.onMessage((uuid, json) => {
     fileType = json.payload.fileType;
   } else if (json.event === "setTitle") {
     title = json.payload.title;
-  } else if (json.event === "setBgColor") {
-    bgColor = json.payload.bgColor;
-    $SD.api.setSettings($SD.uuid, { bgColor });
+  } else if (json.event === "setPauseAllBgColor") {
+    pauseAllBgColor = json.payload.bgColor;
+    $SD.api.setSettings($SD.uuid, { pauseAllBgColor });
   } else if (json.event === "setTaskDescription") {
     taskDescription = json.payload.taskDescription;
   } else if (json.event === "setTimeFormat") {
