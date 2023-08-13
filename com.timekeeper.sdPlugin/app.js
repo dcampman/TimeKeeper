@@ -29,7 +29,7 @@ function writeToLogFile(message, format, context) {
     "Documents",
     "TimeKeeper",
     context,
-    "log.txt"
+    `log.${fileType}`
   );
   switch (format) {
     case "json":
