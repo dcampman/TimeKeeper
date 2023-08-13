@@ -4,9 +4,9 @@ const pauseAllAction = new Action("com.timekeeper.sdPlugin.pauseall");
 const timers = {};
 
 let fileType = "txt"; // This will be updated with the user's input
-let title = ""; // This will be updated with the user's input
-let bgColor = ""; // This will be updated with the user's input
-let taskDescription = ""; // This will be updated with the user's input
+let title = "Task"; // This will be updated with the user's input
+let bgColor = "blue"; // This will be updated with the user's input
+let taskDescription = "Task Timer"; // This will be updated with the user's input
 let timeFormat = ""; // This will be updated with the user's input
 
 /**
@@ -68,7 +68,10 @@ myAction.onKeyUp(({ action, context, device, event, payload }) => {
     timers[context] = new Timer();
     timers[context].start();
     const startTime = new Date();
-    writeToLogFile(`Start: ${startTime}, Title: ${title}, Task Description: ${taskDescription}`, fileType);
+    writeToLogFile(
+      `Start: ${startTime}, Title: ${title}, Task Description: ${taskDescription}`,
+      fileType
+    );
   }
 });
 
