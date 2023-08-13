@@ -1,3 +1,0 @@
-[submodule "timekeeper.sdPlugin/libs"]
-	path = timekeeper.sdPlugin/libs
-	url = https://github.com/elgatosf/streamdeck-javascript-sdk
