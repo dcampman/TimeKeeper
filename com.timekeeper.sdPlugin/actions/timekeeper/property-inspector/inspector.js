@@ -2,6 +2,15 @@ const PropertyInspector = require("../../../libs/js/property-inspector.js");
 const Utils = require("../../../libs/js/utils.js");
 
 $PI.onConnected((jsn) => {
+  // Event listener for file type change
+  document.getElementById("fileType").addEventListener("change", function () {
+    $SD.api.sendToPlugin($SD.uuid, {
+      event: "setFileType",
+      payload: {
+        fileType: this.value,
+      },
+    });
+  });
   // Event listener for image upload
   document
     .getElementById("imageUpload")
@@ -28,15 +37,36 @@ $PI.onConnected((jsn) => {
     });
 
   // Event listener for title change
-  document.getElementById("title").addEventListener("change", function () {});
+  document.getElementById("title").addEventListener("change", function () {
+    $SD.api.sendToPlugin($SD.uuid, {
+      event: "setTitle",
+      payload: {
+        title: this.value,
+      },
+    });
+  });
 
   // Event listener for background color change
-  document.getElementById("bgColor").addEventListener("change", function () {});
+  document.getElementById("bgColor").addEventListener("change", function () {
+    $SD.api.sendToPlugin($SD.uuid, {
+      event: "setBgColor",
+      payload: {
+        bgColor: this.value,
+      },
+    });
+  });
 
   // Event listener for task description change
   document
     .getElementById("taskDescription")
-    .addEventListener("change", function () {});
+    .addEventListener("change", function () {
+      $SD.api.sendToPlugin($SD.uuid, {
+        event: "setTaskDescription",
+        payload: {
+          taskDescription: this.value,
+        },
+      });
+    });
 
   // Event listener for time format change
   document.getElementById("timeFormat").addEventListener("change", function () {
