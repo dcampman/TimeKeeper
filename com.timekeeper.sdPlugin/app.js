@@ -20,6 +20,8 @@ $SD.onConnected(
 
 function writeToLogFile(message, format, context) {
   const moment = require('moment');
+  const fs = require('fs');
+  const path = require('path');
   const date = moment().format(timeFormat);
   const fullMessage = `${dateString} ${message}`;
   const logFilePath = path.join(
@@ -29,6 +31,13 @@ function writeToLogFile(message, format, context) {
     context,
     `log.${fileType}`
   );
+  const logFileDir = path.dirname(logFilePath);
+
+  // Create the directory if it does not exist
+  if (!fs.existsSync(logFileDir)) {
+    fs.mkdirSync(logFileDir, { recursive: true });
+  }
+
   switch (format) {
     case "json":
       fs.appendFile(
