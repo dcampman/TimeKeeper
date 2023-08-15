@@ -1,3 +1,5 @@
+const fs = require("fs");
+const path = require("path");
 const { Action } = require("./libs/js");
 const myAction = new Action("com.timekeeper.sdPlugin.timekeeper");
 const pauseAllAction = new Action("com.timekeeper.sdPlugin.pauseall");
@@ -9,12 +11,31 @@ let bgColor = "blue"; // This will be updated with the user's input
 let taskDescription = "Task Timer"; // This will be updated with the user's input
 let timeFormat = ""; // This will be updated with the user's input
 
+function verifyAndCreateLogFile(context) {
+  const logFilePath = path.join(
+    os.homedir(),
+    ".timeKeeper",
+    context,
+    `log.${fileType}`
+  );
+  const logFileDir = path.dirname(logFilePath);
+
+  // Create the directory and file if they do not exist
+  if (!fs.existsSync(logFileDir)) {
+    fs.mkdirSync(logFileDir, { recursive: true });
+  }
+  if (!fs.existsSync(logFilePath)) {
+    fs.writeFileSync(logFilePath, '');
+  }
+}
+
 /**
  * The first event fired when Stream Deck starts
  */
 $SD.onConnected(
   ({ actionInfo, appInfo, connection, messageType, port, uuid }) => {
     console.log("Stream Deck connected!");
+    verifyAndCreateLogFile(uuid);
   }
 );
 
