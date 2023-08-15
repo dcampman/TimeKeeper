@@ -26,7 +26,7 @@ function writeToLogFile(message, format, context) {
   const fullMessage = `${dateString} ${message}`;
   const logFilePath = path.join(
     os.homedir(),
-    "TimeKeeper",
+    ".timeKeeper",
     context,
     `log.${fileType}`
   );
