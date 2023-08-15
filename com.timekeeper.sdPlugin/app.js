@@ -10,8 +10,7 @@ const settings = {
   title: "Task", // This will be updated with the user's input
   bgColor: "blue", // This will be updated with the user's input
   taskDescription: "Task Timer", // This will be updated with the user's input
-  timeFormat: "", // This will be updated with the user's input
-  logFilePath: ''
+  timeFormat: "" // This will be updated with the user's input
 };
 
 function createDirIfNotExists(dir) {
@@ -25,25 +24,25 @@ function createDirIfNotExists(dir) {
 }
 
 function verifyAndCreateLogFile(context) {
-  if (!settings.logFilePath) {
-    settings.logFilePath = path.join(
-      os.homedir(),
-      ".timeKeeper",
-      context,
-      `log.${settings.fileType}`
-    );
-  }
-  const logFileDir = path.dirname(settings.logFilePath);
+  const logFilePath = path.join(
+    os.homedir(),
+    ".timeKeeper",
+    context,
+    `log.${settings.fileType}`
+  );
+  const logFileDir = path.dirname(logFilePath);
   createDirIfNotExists(logFileDir);
 
   // Create the file only if it does not exist
   fs.access(logFilePath, fs.constants.F_OK, (err) => {
-    if (!exists) {
+    if (err) {
       fs.writeFile(logFilePath, '', (err) => {
         if (err) console.error(err);
       });
     }
   });
+
+  return logFilePath;
 }
 
 /**
@@ -52,23 +51,18 @@ function verifyAndCreateLogFile(context) {
 $SD.onConnected(
   ({ actionInfo, appInfo, connection, messageType, port, uuid }) => {
     console.log("Stream Deck connected!");
-    verifyAndCreateLogFile(uuid);
+    const logFilePath = verifyAndCreateLogFile(uuid);
+    timers[uuid] = { logFilePath };
   }
 );
 
 function writeToLogFile(message, format, context) {
   const moment = require("moment");
   const fs = require("fs");
-  const path = require("path");
   const date = moment().format(settings.timeFormat);
   const fullMessage = `${dateString} ${message}`;
-  const logFilePath = path.join(
-    os.homedir(),
-    ".timeKeeper",
-    context,
-    `log.${settings.fileType}`
-  );
-  const logFileDir = path.dirname(settings.logFilePath);
+  const logFilePath = timers[context].logFilePath;
+  const logFileDir = path.dirname(logFilePath);
   createDirIfNotExists(logFileDir);
 
   switch (format) {
