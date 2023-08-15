@@ -20,8 +20,6 @@ const settings = {
 $SD.onConnected(
   ({ actionInfo, appInfo, connection, messageType, port, uuid }) => {
     console.log("Stream Deck connected!");
-    const logFilePath = verifyAndCreateLogFile(uuid);
-    timers[uuid] = { logFilePath };
   }
 );
 
