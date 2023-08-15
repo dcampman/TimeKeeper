@@ -19,14 +19,13 @@ $SD.onConnected(
 );
 
 function writeToLogFile(message, format, context) {
-  const moment = require('moment');
-  const fs = require('fs');
-  const path = require('path');
+  const moment = require("moment");
+  const fs = require("fs");
+  const path = require("path");
   const date = moment().format(timeFormat);
   const fullMessage = `${dateString} ${message}`;
   const logFilePath = path.join(
     os.homedir(),
-    "Documents",
     "TimeKeeper",
     context,
     `log.${fileType}`
