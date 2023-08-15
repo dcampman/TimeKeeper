@@ -25,7 +25,6 @@ $SD.onConnected(
 
 function writeToLogFile(message, format, context) {
   const moment = require("moment");
-  const fs = require("fs");
   const date = moment().format(settings.timeFormat);
   const fullMessage = `${dateString} ${message}`;
   const logFilePath = path.join(
