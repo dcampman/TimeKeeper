@@ -25,14 +25,10 @@ class ELGSDAction {
 
   verifyAndCreateLogDir(context) {
     const logFileDir = path.join(os.homedir(), ".timeKeeper", context);
-    fs.access(logFileDir, fs.constants.F_OK, (err) => {
+    fs.mkdir(logFileDir, { recursive: true }, (err) => {
       if (err) {
-        fs.mkdir(logFileDir, { recursive: true }, (err) => {
-          if (err) {
-            console.error(`Failed to create directory ${logFileDir}: ${err}`);
-            throw err;
-          }
-        });
+        console.error(`Failed to create directory ${logFileDir}: ${err}`);
+        throw err;
       }
     });
   }

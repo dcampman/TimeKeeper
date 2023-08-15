@@ -23,50 +23,7 @@ $SD.onConnected(
   }
 );
 
-function writeToLogFile(message, format, context) {
-  const moment = require("moment");
-  const date = moment().format(settings.timeFormat);
-  const fullMessage = `${dateString} ${message}`;
-  const logFilePath = path.join(
-    os.homedir(),
-    ".timeKeeper",
-    context,
-    `log.${format}`
-  );
-  const logFileDir = path.dirname(logFilePath);
-  createDirIfNotExists(logFileDir);
-
-  // Create the file only if it does not exist
-  fs.access(logFilePath, fs.constants.F_OK, (err) => {
-    if (err) {
-      fs.writeFile(logFilePath, '', (err) => {
-        if (err) console.error(err);
-      });
-    }
-  });
-
-  switch (format) {
-    case "json":
-      fs.appendFile(
-        logFilePath,
-        JSON.stringify({ fullMessage }) + "\n",
-        (err) => {
-          if (err) throw err;
-        }
-      );
-      break;
-    case "csv":
-      fs.appendFile(logFilePath, `"${fullMessage}"\n`, (err) => {
-        if (err) throw err;
-      });
-      break;
-    default: // txt
-      fs.appendFile(logFilePath, fullMessage + "\n", (err) => {
-        if (err) throw err;
-      });
-      break;
-  }
-}
+// This will be replaced with a call to the LogWriter class
 timekeeperAction.onKeyUp(({ action, context, device, event, payload }) => {
   if (timers[context]) {
     // If a timer exists, pause it
