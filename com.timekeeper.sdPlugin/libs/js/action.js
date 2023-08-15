@@ -246,3 +246,5 @@ class ELGSDAction {
 }
 
 const Action = ELGSDAction;
+const $SD = new ELGSDPlugin();
+const $PI = new ELGSDPropertyInspector();
