@@ -15,7 +15,7 @@ const settings = {
 };
 
 function createDirIfNotExists(dir) {
-  fs.exists(dir, (exists) => {
+  fs.access(dir, fs.constants.F_OK, (err) => {
     if (!exists) {
       fs.mkdir(dir, { recursive: true }, (err) => {
         if (err) console.error(err);
@@ -37,7 +37,7 @@ function verifyAndCreateLogFile(context) {
   createDirIfNotExists(logFileDir);
 
   // Create the file only if it does not exist
-  fs.exists(logFilePath, (exists) => {
+  fs.access(logFilePath, fs.constants.F_OK, (err) => {
     if (!exists) {
       fs.writeFile(logFilePath, '', (err) => {
         if (err) console.error(err);
