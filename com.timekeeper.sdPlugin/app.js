@@ -13,37 +13,6 @@ const settings = {
   timeFormat: "" // This will be updated with the user's input
 };
 
-function createDirIfNotExists(dir) {
-  fs.access(dir, fs.constants.F_OK, (err) => {
-    if (!exists) {
-      fs.mkdir(dir, { recursive: true }, (err) => {
-        if (err) console.error(err);
-      });
-    }
-  });
-}
-
-function verifyAndCreateLogFile(context) {
-  const logFilePath = path.join(
-    os.homedir(),
-    ".timeKeeper",
-    context,
-    `log.${settings.fileType}`
-  );
-  const logFileDir = path.dirname(logFilePath);
-  createDirIfNotExists(logFileDir);
-
-  // Create the file only if it does not exist
-  fs.access(logFilePath, fs.constants.F_OK, (err) => {
-    if (err) {
-      fs.writeFile(logFilePath, '', (err) => {
-        if (err) console.error(err);
-      });
-    }
-  });
-
-  return logFilePath;
-}
 
 /**
  * The first event fired when Stream Deck starts

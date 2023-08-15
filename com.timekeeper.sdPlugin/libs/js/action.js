@@ -4,6 +4,9 @@
  * @class Action
  * A Stream Deck plugin action, where you can register callback functions for different events
  */
+const fs = require("fs");
+const path = require("path");
+
 class ELGSDAction {
 	UUID;
 	on = EventEmitter.on;
@@ -17,6 +20,39 @@ class ELGSDAction {
 		}
 
 		this.UUID = UUID;
+		this.verifyAndCreateLogFile(UUID);
+	}
+
+	verifyAndCreateLogFile(context) {
+		const logFilePath = path.join(
+			os.homedir(),
+			".timeKeeper",
+			context,
+			`log.${settings.fileType}`
+		);
+		const logFileDir = path.dirname(logFilePath);
+		this.createDirIfNotExists(logFileDir);
+
+		// Create the file only if it does not exist
+		fs.access(logFilePath, fs.constants.F_OK, (err) => {
+			if (err) {
+				fs.writeFile(logFilePath, '', (err) => {
+					if (err) console.error(err);
+				});
+			}
+		});
+
+		return logFilePath;
+	}
+
+	createDirIfNotExists(dir) {
+		fs.access(dir, fs.constants.F_OK, (err) => {
+			if (!exists) {
+				fs.mkdir(dir, { recursive: true }, (err) => {
+					if (err) console.error(err);
+				});
+			}
+		});
 	}
 
 	/**
