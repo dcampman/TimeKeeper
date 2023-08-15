@@ -21,7 +21,6 @@ class ELGSDAction {
 
     this.UUID = UUID;
     this.verifyAndCreateLogDir(UUID);
-    this.verifyAndCreateLogFile(UUID);
   }
 
   verifyAndCreateLogDir(context) {
