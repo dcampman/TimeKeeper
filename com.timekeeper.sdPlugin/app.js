@@ -11,24 +11,39 @@ let bgColor = "blue"; // This will be updated with the user's input
 let taskDescription = "Task Timer"; // This will be updated with the user's input
 let timeFormat = ""; // This will be updated with the user's input
 
+let logFilePath = '';
+
 function verifyAndCreateLogFile(context) {
-  const logFilePath = path.join(
-    os.homedir(),
-    ".timeKeeper",
-    context,
-    `log.${fileType}`
-  );
+  if (!logFilePath) {
+    logFilePath = path.join(
+      os.homedir(),
+      ".timeKeeper",
+      context,
+      `log.${fileType}`
+    );
+  }
   const logFileDir = path.dirname(logFilePath);
 
-  // Create the directory if it does not exist
-  if (!fs.existsSync(logFileDir)) {
-    fs.mkdirSync(logFileDir, { recursive: true });
-  }
+function createDirIfNotExists(dir) {
+  fs.exists(dir, (exists) => {
+    if (!exists) {
+      fs.mkdir(dir, { recursive: true }, (err) => {
+        if (err) console.error(err);
+      });
+    }
+  });
+}
+
+createDirIfNotExists(logFileDir);
 
   // Create the file only if it does not exist
-  if (!fs.existsSync(logFilePath)) {
-    fs.writeFileSync(logFilePath, '');
-  }
+  fs.exists(logFilePath, (exists) => {
+    if (!exists) {
+      fs.writeFile(logFilePath, '', (err) => {
+        if (err) console.error(err);
+      });
+    }
+  });
 }
 
 /**
@@ -55,10 +70,17 @@ function writeToLogFile(message, format, context) {
   );
   const logFileDir = path.dirname(logFilePath);
 
-  // Create the directory if it does not exist
-  if (!fs.existsSync(logFileDir)) {
-    fs.mkdirSync(logFileDir, { recursive: true });
-  }
+function createDirIfNotExists(dir) {
+  fs.exists(dir, (exists) => {
+    if (!exists) {
+      fs.mkdir(dir, { recursive: true }, (err) => {
+        if (err) throw err;
+      });
+    }
+  });
+}
+
+createDirIfNotExists(logFileDir);
 
   switch (format) {
     case "json":
