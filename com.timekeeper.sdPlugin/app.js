@@ -4,71 +4,70 @@ const { Action } = require("./libs/js");
 const timekeeperAction = new Action("com.timekeeper.sdPlugin.timekeeper");
 const pauseAllAction = new Action("com.timekeeper.sdPlugin.pauseall");
 const timers = {};
-
-const settings = {
-  fileType: "txt", // This will be updated with the user's input
-  title: "Task", // This will be updated with the user's input
-  bgColor: "blue", // This will be updated with the user's input
-  taskDescription: "Task Timer", // This will be updated with the user's input
-  timeFormat: "" // This will be updated with the user's input
-};
-
+const settings = {};
 
 /**
  * The first event fired when Stream Deck starts
  */
-$SD.onConnected(
-  ({ actionInfo, appInfo, connection, messageType, port, uuid }) => {
-    console.log("Stream Deck connected!");
-  }
-);
+$SD.onConnected(({ actionInfo, appInfo, connection, messageType, port, uuid }) => {
+  console.log("Stream Deck connected!");
+});
 
 // This will be replaced with a call to the LogWriter class
 timekeeperAction.onKeyUp(({ action, context, device, event, payload }) => {
-  if (timers[context]) {
-    // If a timer exists, pause it
+  if (!timers[context]) {
+    // If no timer exists, start a new one and initialize the settings
+    timers[context] = new Timer();
+    settings[context] = {
+      fileType: "txt",
+      title: "Task",
+      bgColor: "blue",
+      taskDescription: "Task Timer",
+      timeFormat: ""
+    };
+    timers[context].start();
+    const startTime = new Date();
+    writeToLogFile(
+      `Start: ${startTime}, Title: ${settings[context].title}, Task Description: ${settings[context].taskDescription}`,
+      settings[context].fileType
+    );
+  } else {
+    // If a timer exists, pause it and log the pause time
     timers[context].pause();
     const pauseTime = new Date();
     const elapsedTime = timers[context].getTime();
     writeToLogFile(
       `Pause: ${pauseTime}, Elapsed Time: ${elapsedTime}`,
-      fileType
-    );
-  } else {
-    // If no timer exists, start a new one
-    timers[context] = new Timer();
-    timers[context].start();
-    const startTime = new Date();
-    writeToLogFile(
-      `Start: ${startTime}, Title: ${title}, Task Description: ${taskDescription}`,
-      fileType
+      settings[context].fileType
     );
   }
 });
 
 $SD.onMessage((uuid, json) => {
-  if (json.event === "setFileType") {
-    settings.fileType = json.payload.fileType;
-  } else if (json.event === "setTitle") {
-    settings.title = json.payload.title;
-  } else if (json.event === "setBgColor") {
-    settings.bgColor = json.payload.bgColor;
-    $SD.api.setSettings($SD.uuid, { bgColor: settings.bgColor });
-  } else if (json.event === "setPauseAllBgColor") {
-    settings.pauseAllBgColor = json.payload.bgColor;
-    $SD.api.setSettings($SD.uuid, { pauseAllBgColor: settings.pauseAllBgColor });
-  } else if (json.event === "setTaskDescription") {
-    settings.taskDescription = json.payload.taskDescription;
-  } else if (json.event === "setTimeFormat") {
-    settings.timeFormat = json.payload.timeFormat;
+  const { event, payload } = json;
+  const context = payload?.context;
+  if (event === "setFileType") {
+    // Update the fileType setting for the corresponding TimeKeeper action
+    settings[context].fileType = payload.fileType;
+  } else if (event === "setTitle") {
+    // Update the title setting for the corresponding TimeKeeper action
+    settings[context].title = payload.title;
+  } else if (event === "setBgColor") {
+    // Update the bgColor setting for the corresponding TimeKeeper action
+    settings[context].bgColor = payload.bgColor;
+    $SD.api.setSettings(context, { bgColor: settings[context].bgColor });
+  } else if (event === "setTaskDescription") {
+    // Update the taskDescription setting for the corresponding TimeKeeper action
+    settings[context].taskDescription = payload.taskDescription;
+  } else if (event === "setTimeFormat") {
+    // Update the timeFormat setting for the corresponding TimeKeeper action
+    settings[context].timeFormat = payload.timeFormat;
   }
 });
 
 pauseAllAction.onKeyUp(({ action, context, device, event, payload }) => {
   // Pause all timers
-  for (let timer of Object.values(timers)) {
-    timer.pause();
-  }
+  Timer.pauseAll(timers);
   // Change the background color of the pauseAll action button
-  $SD.api.setGlobalSettings($SD.uuid, { bgColor: pausedBgColor });
+  $SD.api.setGlobalSettings($SD.uuid, { bgColor: payload.pausedBgColor });
 });
