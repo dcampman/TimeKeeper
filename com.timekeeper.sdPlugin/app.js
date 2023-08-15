@@ -5,24 +5,14 @@ const myAction = new Action("com.timekeeper.sdPlugin.timekeeper");
 const pauseAllAction = new Action("com.timekeeper.sdPlugin.pauseall");
 const timers = {};
 
-let fileType = "txt"; // This will be updated with the user's input
-let title = "Task"; // This will be updated with the user's input
-let bgColor = "blue"; // This will be updated with the user's input
-let taskDescription = "Task Timer"; // This will be updated with the user's input
-let timeFormat = ""; // This will be updated with the user's input
-
-let logFilePath = '';
-
-function verifyAndCreateLogFile(context) {
-  if (!logFilePath) {
-    logFilePath = path.join(
-      os.homedir(),
-      ".timeKeeper",
-      context,
-      `log.${fileType}`
-    );
-  }
-  const logFileDir = path.dirname(logFilePath);
+const settings = {
+  fileType: "txt", // This will be updated with the user's input
+  title: "Task", // This will be updated with the user's input
+  bgColor: "blue", // This will be updated with the user's input
+  taskDescription: "Task Timer", // This will be updated with the user's input
+  timeFormat: "", // This will be updated with the user's input
+  logFilePath: ''
+};
 
 function createDirIfNotExists(dir) {
   fs.exists(dir, (exists) => {
@@ -34,7 +24,17 @@ function createDirIfNotExists(dir) {
   });
 }
 
-createDirIfNotExists(logFileDir);
+function verifyAndCreateLogFile(context) {
+  if (!settings.logFilePath) {
+    settings.logFilePath = path.join(
+      os.homedir(),
+      ".timeKeeper",
+      context,
+      `log.${settings.fileType}`
+    );
+  }
+  const logFileDir = path.dirname(settings.logFilePath);
+  createDirIfNotExists(logFileDir);
 
   // Create the file only if it does not exist
   fs.exists(logFilePath, (exists) => {
@@ -60,27 +60,16 @@ function writeToLogFile(message, format, context) {
   const moment = require("moment");
   const fs = require("fs");
   const path = require("path");
-  const date = moment().format(timeFormat);
+  const date = moment().format(settings.timeFormat);
   const fullMessage = `${dateString} ${message}`;
   const logFilePath = path.join(
     os.homedir(),
     ".timeKeeper",
     context,
-    `log.${fileType}`
+    `log.${settings.fileType}`
   );
-  const logFileDir = path.dirname(logFilePath);
-
-function createDirIfNotExists(dir) {
-  fs.exists(dir, (exists) => {
-    if (!exists) {
-      fs.mkdir(dir, { recursive: true }, (err) => {
-        if (err) throw err;
-      });
-    }
-  });
-}
-
-createDirIfNotExists(logFileDir);
+  const logFileDir = path.dirname(settings.logFilePath);
+  createDirIfNotExists(logFileDir);
 
   switch (format) {
     case "json":
@@ -128,19 +117,19 @@ myAction.onKeyUp(({ action, context, device, event, payload }) => {
 
 $SD.onMessage((uuid, json) => {
   if (json.event === "setFileType") {
-    fileType = json.payload.fileType;
+    settings.fileType = json.payload.fileType;
   } else if (json.event === "setTitle") {
-    title = json.payload.title;
+    settings.title = json.payload.title;
   } else if (json.event === "setBgColor") {
-    bgColor = json.payload.bgColor;
-    $SD.api.setSettings($SD.uuid, { bgColor });
+    settings.bgColor = json.payload.bgColor;
+    $SD.api.setSettings($SD.uuid, { bgColor: settings.bgColor });
   } else if (json.event === "setPauseAllBgColor") {
-    pauseAllBgColor = json.payload.bgColor;
-    $SD.api.setSettings($SD.uuid, { pauseAllBgColor });
+    settings.pauseAllBgColor = json.payload.bgColor;
+    $SD.api.setSettings($SD.uuid, { pauseAllBgColor: settings.pauseAllBgColor });
   } else if (json.event === "setTaskDescription") {
-    taskDescription = json.payload.taskDescription;
+    settings.taskDescription = json.payload.taskDescription;
   } else if (json.event === "setTimeFormat") {
-    timeFormat = json.payload.timeFormat;
+    settings.timeFormat = json.payload.timeFormat;
   }
 });
 
