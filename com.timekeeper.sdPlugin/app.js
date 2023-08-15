@@ -30,9 +30,23 @@ function writeToLogFile(message, format, context) {
   const fs = require("fs");
   const date = moment().format(settings.timeFormat);
   const fullMessage = `${dateString} ${message}`;
-  const logFilePath = timers[context].logFilePath;
+  const logFilePath = path.join(
+    os.homedir(),
+    ".timeKeeper",
+    context,
+    `log.${format}`
+  );
   const logFileDir = path.dirname(logFilePath);
   createDirIfNotExists(logFileDir);
+
+  // Create the file only if it does not exist
+  fs.access(logFilePath, fs.constants.F_OK, (err) => {
+    if (err) {
+      fs.writeFile(logFilePath, '', (err) => {
+        if (err) console.error(err);
+      });
+    }
+  });
 
   switch (format) {
     case "json":
