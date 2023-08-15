@@ -20,10 +20,12 @@ function verifyAndCreateLogFile(context) {
   );
   const logFileDir = path.dirname(logFilePath);
 
-  // Create the directory and file if they do not exist
+  // Create the directory if it does not exist
   if (!fs.existsSync(logFileDir)) {
     fs.mkdirSync(logFileDir, { recursive: true });
   }
+
+  // Create the file only if it does not exist
   if (!fs.existsSync(logFilePath)) {
     fs.writeFileSync(logFilePath, '');
   }
