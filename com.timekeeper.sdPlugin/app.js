@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const { Action } = require("./libs/js");
-const myAction = new Action("com.timekeeper.sdPlugin.timekeeper");
+const timekeeperAction = new Action("com.timekeeper.sdPlugin.timekeeper");
 const pauseAllAction = new Action("com.timekeeper.sdPlugin.pauseall");
 const timers = {};
 
@@ -93,7 +93,7 @@ function writeToLogFile(message, format, context) {
       break;
   }
 }
-myAction.onKeyUp(({ action, context, device, event, payload }) => {
+timekeeperAction.onKeyUp(({ action, context, device, event, payload }) => {
   if (timers[context]) {
     // If a timer exists, pause it
     timers[context].pause();
